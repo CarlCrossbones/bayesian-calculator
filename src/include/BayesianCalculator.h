@@ -4,6 +4,6 @@ class BayesianCalculator
 {
     public:
         //Constructor and Destructor
-        BayesianCalculator(){};
-        ~BayesianCalculator(){};
+        BayesianCalculator();
+        ~BayesianCalculator();
 };
