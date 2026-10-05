@@ -48,7 +48,7 @@ make
 To build and run this project using Docker execute the following commands in the root of the project:
 ```
 docker build -t calculator .
-docekr run -t calculator:latest
+docker run -t calculator:latest
 ```
 
 ### Dependencies
