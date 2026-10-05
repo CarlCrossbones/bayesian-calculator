@@ -30,9 +30,36 @@ $$
 This project implements a Bayesian Calculator in C++.
 
 ## Technical Notes
+*Note: documentation assumes you are using a unix-like operating system*
+
+Before building, testing, or running this project, please install all [dependencies](#dependencies)
+
+### Local Building and Running
+**Cmake**
+To build and run this project using CMake execute the following commands in the root of the project:
+```
+cmake -S ./src -B build
+cd build/
+make
+./calculator
+```
+
+**Docker**
+To build and run this project using Docker execute the following commands in the root of the project:
+```
+docker build -t calculator .
+docker run -t calculator:latest
+```
 
 ### Dependencies
-> 
+*Note: Any version before or after these have not been tested. It should be assumed that version after those listed work, but please feel free to put up an issue if you discover this is not the case.*
+> `cmake >= 3.16`
+
+> `docker >= 29.7.2`
+
+> `gcc >= 16.2.1`
+
+> `GNU Make >= 4.4.1`
 
 ### Dev Log
 > *0.0.1* - Initialize project and update README.
