@@ -1,4 +1,4 @@
-name: "CodeQL Advanced"
+name: "CI/CD Pipeline"
 
 on:
   push:
@@ -9,6 +9,17 @@ on:
     - cron: '15 15 * * 6'
 
 jobs:
+  ## BUILD STEP
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Calculator Image
+      run: docker build . --file Dockerfile --tag calculator:$(date +%s)
+      
+  ## ANALYZE STEP
   analyze:
     name: Analyze (${{ matrix.language }})
     runs-on: ubuntu-latest
