@@ -52,13 +52,14 @@ docker run -t calculator:latest
 ```
 
 ### Dependencies
-> `cmake == 3.16`
+*Note: Any version before or after these have not been tested. It should be assumed that version after those listed work, but please feel free to put up an issue if you discover this is not the case.*
+> `cmake >= 3.16`
 
-> `docker == 29.7.2`
+> `docker >= 29.7.2`
 
-> `gcc == 16.2.1`
+> `gcc >= 16.2.1`
 
-> `GNU Make == 4.4.1`
+> `GNU Make >= 4.4.1`
 
 ### Dev Log
 > *0.0.1* - Initialize project and update README.
