@@ -67,8 +67,5 @@ vcpkg_installed/
 Testing/
 .cache/
 
-# github
-.github
-
 # vs
 .vscode
