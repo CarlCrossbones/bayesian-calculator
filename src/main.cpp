@@ -17,5 +17,5 @@ int main(int argc, char** argv){
         strcpy(buf, argv[1]);  // unchecked copy into an 8-byte buffer
     }
 
-    return 0;
+    return buf[0];
 }
