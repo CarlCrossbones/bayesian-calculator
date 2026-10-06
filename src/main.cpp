@@ -1,5 +1,6 @@
 #include "ApplicationManager.h"
 #include <memory>
+#include <cstring>
 
 int main(int argc, char** argv){
 
