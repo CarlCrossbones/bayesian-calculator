@@ -1,7 +1,7 @@
 #include "ApplicationManager.h"
 #include <memory>
 
-int main(){
+int main(int argc, char** argv){
 
     // Create Calculator
     auto calcPtr = std::make_shared<BayesianCalculator>();
@@ -11,8 +11,11 @@ int main(){
     auto appPtr = std::make_unique<ApplicationManager>(calculator);
     ApplicationManager& app = *appPtr;
 
+    // TEMPORARY: deliberately unsafe, for testing CodeQL. Delete after.
     char buf[8];
-    strcpy(buf, argv[1]);   // unchecked copy into a fixed buffer
+    if (argc > 1) {
+        strcpy(buf, argv[1]);  // unchecked copy into an 8-byte buffer
+    }
 
     return 0;
 }
