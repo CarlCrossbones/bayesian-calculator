@@ -8,14 +8,16 @@ on:
   schedule:
     - cron: '15 15 * * 6'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   ## BUILD STEP
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - name: Build the Calculator Image
       run: docker build . --file Dockerfile --tag calculator:$(date +%s)
 
@@ -38,16 +40,15 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v7
+      uses: actions/checkout@v6
 
     - name: Install build dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y --no-install-recommends cmake ninja-build g++
-        # add any other packages your Dockerfile installs
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v7
+      uses: github/codeql-action/init@v4
       with:
         languages: ${{ matrix.language }}
         build-mode: ${{ matrix.build-mode }}
