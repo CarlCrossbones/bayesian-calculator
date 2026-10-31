@@ -1,7 +1,8 @@
 #include "ApplicationManager.h"
 #include <memory>
+#include <cstring>
 
-int main(){
+int main(int argc, char** argv){
 
     // Create Calculator
     auto calcPtr = std::make_shared<BayesianCalculator>();

@@ -1,4 +1,4 @@
-name: "CodeQL Advanced"
+name: "CI/CD Pipeline"
 
 on:
   push:
@@ -8,7 +8,20 @@ on:
   schedule:
     - cron: '15 15 * * 6'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
+  ## BUILD STEP
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - name: Build the Calculator Image
+      run: docker build . --file Dockerfile --tag calculator:$(date +%s)
+
+  ## ANALYZE STEP
   analyze:
     name: Analyze (${{ matrix.language }})
     runs-on: ubuntu-latest
@@ -27,23 +40,23 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v7
+      uses: actions/checkout@v6
 
     - name: Install build dependencies
       run: |
         sudo apt-get update
         sudo apt-get install -y --no-install-recommends cmake ninja-build g++
-        # add any other packages your Dockerfile installs
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v4
       with:
         languages: ${{ matrix.language }}
         build-mode: ${{ matrix.build-mode }}
+        queries: security-extended
 
     - name: Build with CMake
       run: |
-        cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+        cmake -S ./src -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
         cmake --build build
 
     - name: Perform CodeQL Analysis
