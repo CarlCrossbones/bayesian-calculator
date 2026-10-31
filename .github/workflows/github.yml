@@ -59,6 +59,6 @@ jobs:
         cmake --build build
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v7
+      uses: github/codeql-action/analyze@v4
       with:
         category: "/language:${{matrix.language}}"
