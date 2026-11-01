@@ -21,6 +21,26 @@ jobs:
     - name: Build the Calculator Image
       run: docker build . --file Dockerfile --tag calculator:$(date +%s)
 
+  ## TEST STEP
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+
+    - name: Install build dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends cmake ninja-build g++
+
+    - name: Configure and run tests
+      run: |
+        cmake -S ./src -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
+        cmake --build build
+        ctest --test-dir build --output-on-failure
+
   ## ANALYZE STEP
   analyze:
     name: Analyze (${{ matrix.language }})
