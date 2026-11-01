@@ -39,9 +39,16 @@ Before building, testing, or running this project, please install all [dependenc
 To build and run this project using CMake execute the following commands in the root of the project:
 ```
 cmake -S ./src -B build
-cd build/
-make
-./calculator
+cmake --build build
+./build/calculator
+```
+
+**Running tests**
+This project uses GoogleTest via CMake's `FetchContent`, so the test suite is built automatically when you configure the project. You can then run either the test binary or the CTest runner:
+```
+cmake -S ./src -B build
+cmake --build build
+ctest --test-dir build --output-on-failure
 ```
 
 **Docker**
@@ -63,6 +70,7 @@ docker run -t calculator:latest
 
 ### Dev Log
 > *0.0.1* - Initialize project and update README.
+> *0.0.2* - Initialize CI/CD pipeline including containerization and testing.
 
 ## Footnotes
 > [^1]: “An Intuitive (and Short) Explanation of Bayes’ Theorem – BetterExplained,” Betterexplained.com, 2019. https://betterexplained.com/articles/an-intuitive-and-short-explanation-of-bayes-theorem/ (accessed Oct. 04, 2026).
