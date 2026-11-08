@@ -34,7 +34,7 @@ enable_testing()
 
 add_executable(bayesian_calculator_tests
     unit_tests/BayesianCalculatorTests.cpp
-    unit_tests/ApplicationMangagerTests.cpp
+    unit_tests/ApplicationManagerTests.cpp
 )
 target_link_libraries(bayesian_calculator_tests
     PRIVATE
